@@ -1,0 +1,5 @@
+(in-package cl-user)
+
+(defsystem :mail-inet (:pretty-name "Mail POP3/SMTP Clients"
+				       :default-pathname "share:mail;inet;")
+  (:serial "pkgdcl" "mbox" "pop3" "mail-receipt" "mail-delivery"))

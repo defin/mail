@@ -1,0 +1,22 @@
+;;; -*- Mode: Lisp -*-
+
+(in-package cl-user)
+
+(rutils:add-loaded-component "Mail" 0)
+
+(load "share:mail;message;message.system")
+(load "share:mail;store;mail-store.system")
+(load "share:mail;process;mail-process.system")
+#+mswindows (load "share:mail;ui;mail-ui.system")
+(load "share:mail;inet;mail-inet.system")
+
+(defsystem :mail (:pretty-name "Mail System"
+		  :default-pathname "share:mail;")
+  (:serial :message :mail-store :mail-process #+mswindows :mail-ui :mail-inet))
+
+#|
+(sql-fragments:drop-table-archive_message)
+(sql-fragments:create-table-archive_message)
+(sql-fragments:drop-table-message)
+(sql-fragments:create-table-message)
+|#

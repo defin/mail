@@ -1,0 +1,30 @@
+(in-package mail-process)
+
+(defun check-mail-pop3 (mailbox)
+  (with-slots (host user pass) mailbox
+    (mail-base:with-pop3-mailbox (host user pass)
+      (loop for msgnum from 1 to rfc2822::.message-count.
+	    as message = (mail-base:retrieve-message msgnum)
+	    when (and message (process-message message))
+	      do (mail-base:delete-message msgnum)))))
+
+(defun check-mail-mbox (mbox-file)
+  (with-open-file (m mbox-file :direction :input)
+    (loop with msg = nil
+	  with endp = nil
+	  do (multiple-value-setq (msg endp) (mail-base::read-mbox-message m))
+	  until endp
+	  do (and msg (process-message msg)))))
+
+;;; read in a message, store it to mail archive, parse it, store it to main db, categorize it, and if applicable update database tables with changes
+
+(defun process-message (message-text)
+  (let* ((archive (mail-store:archive-message message-text))
+	 (parsed (rfc2822-parser:make-rfc2822-message (mail-store:archive-message-headers archive)
+						      (mail-store:archive-message-body archive)))
+	 (msg (mail-store:create-message archive parsed)))
+;    (categorize-message msg parsed)
+;    (apply-updates parsed))
+    t))
+
+;(check-mail-mbox "z:/devo/code/bookman/data/bookmail3")

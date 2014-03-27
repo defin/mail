@@ -1,0 +1,14 @@
+;;; -*- Mode: Lisp -*-
+
+(in-package cl-user)
+
+(defsystem :message (:pretty-name "Mail Message Handling"
+				  :default-pathname "share:mail;message;")
+  (:serial "pkgdcl")
+  (:serial "base" "headers")
+  (:serial "rfc2822-message" "mailbox-parser" "message-id-parser" "date-parser" "rfc2822-headers" "generator")
+  (:serial "mime-headers" "mime-entity" "mime-message" "mime-body" "multipart" "quoted-printable" #+nil "media-types"))
+
+
+
+

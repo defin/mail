@@ -1,0 +1,12 @@
+;;; -*- Mode: Lisp -*-
+
+(in-package cl-user)
+
+(defsystem :mail-store (:pretty-name "Mail Storage Substrate"
+			 :default-pathname "share:mail;store;")
+  (:serial "pkgdcl")
+  (:serial "tables/email-address" "tables/archive-message" "tables/message-id" "tables/message" "tables/message-reference" 
+	   "tables/mailbox-has-message" "tables/mailbox" "tables/deliverable-message" "tables/draft-message" "tables/canned-message")
+  (:serial "tables/sqload"))
+
+

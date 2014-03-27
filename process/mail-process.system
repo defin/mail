@@ -1,0 +1,16 @@
+;;; -*- Mode: Lisp -*-
+
+(in-package bootstrap)
+
+(defsystem :mail-process (:pretty-name "Mail Processing Substrate"
+			  :default-pathname "share:mail;process;")
+  (:serial "pkgdcl")
+  (:serial "process" "send-mail" "category-inference" "categorize" "mail-scraper")
+  (:serial "substitutions"))
+;"categorize" "canned-replies"))
+
+
+
+
+
+
